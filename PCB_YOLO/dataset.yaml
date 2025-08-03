@@ -1,0 +1,12 @@
+path: C:\Users\hubert\Downloads\ai\ai-pcb-fault-detection\PCB_YOLO
+train: images/train
+val: images/val
+
+names:
+  0: Missing_hole
+  1: Mouse_bite
+  2: OK
+  3: Open_circuit
+  4: Short
+  5: Spur
+  6: Spurious_copper
