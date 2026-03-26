@@ -220,11 +220,27 @@ The following libraries are part of Python and do not require installation:
 
 * `tkinter` – used for building the graphical user interface
 
-⚠️ Note:
-`tkinter` is included with Python, but on some Linux systems it must be installed manually:
+⚠️ **Note:**
+`tkinter` is included with Python, but on some Linux distributions it must be installed manually.
+
+#### Installation by system:
+
+**Debian / Ubuntu:**
 
 ```bash
 sudo apt install python3-tk
+```
+
+**Fedora:**
+
+```bash
+sudo dnf install python3-tkinter
+```
+
+**Arch Linux:**
+
+```bash
+sudo pacman -S tk
 ```
 
 ---
