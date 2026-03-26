@@ -177,15 +177,16 @@ The project demonstrates that:
 
 ---
 
-## 🖼️ Example Result
+## 🖼️ Example Results
 
-*(add your image here)*
+### YOLO Detection
+<img src="images/yolo-results.png" width="600"/>
 
-```markdown
-![YOLO Detection](images/yolo-result.png)
-```
+### Confusion Matrix
+<img src="images/confusion-matrix.png" width="600"/>
 
----
+### Example PCB Defect (Spur)
+<img src="images/pcb-defect-example.jpg" width="600"/>
 
 ## 🖥️ Application
 
@@ -221,7 +222,7 @@ A GUI application was developed in Python:
 
 ## 👨‍💻 Authors
 
-Hubert Jabłoński
+Hubert Jabłoński,
 Jakub Czekaj
 
 AGH University of Science and Technology
