@@ -29,24 +29,27 @@ Different models were trained and evaluated under the same conditions to analyze
 
 ## 📊 Dataset
 
-* ~1400 PCB images
-* 7 defect classes:
+The dataset used in this project is based on a publicly available PCB defect detection dataset:
 
-  * Missing_hole
-  * Mouse_bite
-  * OK
-  * Open_circuit
-  * Short
-  * Spur
-  * Spurious_copper
+* https://universe.roboflow.com/pcbdataset/pcb-defect-detection-9ewqw
+
+The dataset contains approximately **700 images** divided into 7 defect classes:
+
+* Missing_hole
+* Mouse_bite
+* OK
+* Open_circuit
+* Short
+* Spur
+* Spurious_copper
 
 Images were resized to:
 
-* 256x256 (classification)
+* 256x256 (classification models)
 * 640x640 (YOLOv8)
 
 ⚠️ Important limitation:
-Dataset contained only ~12 unique PCB boards, which significantly affected generalization. 
+The dataset contains a relatively small number of samples and limited diversity (images from a small number of PCB boards), which negatively affects model generalization and leads to overfitting.
 
 ---
 
