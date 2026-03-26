@@ -192,6 +192,45 @@ The project demonstrates that:
 
 A GUI application was developed in Python:
 
+## 🛠️ Technologies & Libraries
+
+### 🔹 Core Libraries
+
+* PyTorch – deep learning framework
+* torchvision – pretrained models and image transformations
+* Pillow – image processing
+* pandas – data handling and analysis
+* matplotlib – visualization
+
+---
+
+### 🔹 Python Standard Libraries
+
+The following libraries are part of Python and do not require installation:
+
+* `os` – file system operations
+* `time` – time measurement and performance tracking
+
+---
+
+### 🔹 GUI
+
+* `tkinter` – used for building the graphical user interface
+
+⚠️ Note:
+`tkinter` is included with Python, but on some Linux systems it must be installed manually:
+
+```bash
+sudo apt install python3-tk
+```
+
+---
+
+### 🔹 Additional Tools
+
+* YOLOv8 – object detection framework for PCB defect localization
+
+
 ### Features:
 
 * load trained model (.pth)
