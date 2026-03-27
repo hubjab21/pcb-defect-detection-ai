@@ -6,35 +6,35 @@ import torchvision.transforms as transforms
 from torchvision import models
 import os
 
-# Opcjonalnie: jeśli YOLOv8 ma być używane
+# Optional: if YOLOv8 is required
 try:
     from ultralytics import YOLO
     YOLO_AVAILABLE = True
 except ImportError:
     YOLO_AVAILABLE = False
 
-# Detekcja CUDA / CPU
+# CUDA / CPU Detection
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# Nazwy klas dla klasyfikatora
+# Class Names for the Classifier
 CLASS_NAMES = ['Missing_hole', 'Mouse_bite', 'OK', 'Open_circuit', 'Short', 'Spur', 'Spurious_copper']
 
-# Inicjalizacja GUI
+# GUI Initialization
 app = tk.Tk()
-app.title("Wykrywanie uszkodzeń PCB")
+app.title("PCB Inspection using Deep Learning")
 app.geometry("520x540")
 app.resizable(False, False)
 
-# Globalne zmienne
+# Global Variables
 image_path = ""
 model_path = ""
 
 # GUI Elements
-model_label = tk.Label(app, text="Brak modelu")
-image_label = tk.Label(app, text="Brak zdjęcia")
+model_label = tk.Label(app, text="No model loaded")
+image_label = tk.Label(app, text="No image selected")
 image_display = tk.Label(app)
-result_label = tk.Label(app, text="Wynik: brak", font=("Arial", 12, "bold"))
-fault_detail_label = tk.Label(app, text="Rodzaj uszkodzenia: brak", font=("Arial", 11))
+result_label = tk.Label(app, text="Result: none", font=("Arial", 12, "bold"))
+fault_detail_label = tk.Label(app, text="Defect type: none", font=("Arial", 11))
 
 def choose_model():
     global model_path
@@ -59,11 +59,11 @@ def show_image(path):
         image_display.config(image=photo)
         image_display.image = photo
     except Exception as e:
-        messagebox.showerror("Błąd obrazu", str(e))
+        messagebox.showerror("Image Error", str(e))
 
 def run_prediction():
     if not model_path or not image_path:
-        messagebox.showwarning("Brak danych", "Wybierz model i zdjęcie.")
+        messagebox.showwarning("No Data", "Please select a model and an image.")
         return
 
     ext = os.path.splitext(model_path)[-1].lower()
@@ -73,7 +73,7 @@ def run_prediction():
     elif ext == ".pt" and YOLO_AVAILABLE:
         run_yolo_detection()
     else:
-        messagebox.showerror("Nieobsługiwany format", "Nieobsługiwany plik modelu lub brak YOLO.")
+        messagebox.showerror("Unsupported Format", "Unsupported model file or YOLO support is missing.")
 
 def run_resnet_prediction():
     try:
@@ -102,37 +102,37 @@ def run_resnet_prediction():
 
         class_name = CLASS_NAMES[prediction] if prediction < len(CLASS_NAMES) else f"Klasa {prediction}"
         if class_name == "OK":
-            result_label.config(text="Wynik: Sprawny")
-            fault_detail_label.config(text="Rodzaj uszkodzenia: brak")
+            result_label.config(text="Result: OK")
+            fault_detail_label.config(text="Defect type: none")
         else:
-            result_label.config(text="Wynik: Uszkodzony")
-            fault_detail_label.config(text=f"Rodzaj uszkodzenia: {class_name.replace('_', ' ')}")
+            result_label.config(text="Result: Defective")
+            fault_detail_label.config(text=f"Defect type: {class_name.replace('_', ' ')}")
 
     except Exception as e:
-        messagebox.showerror("Błąd ResNet", str(e))
+        messagebox.showerror("ResNet Error", str(e))
 
 def run_yolo_detection():
     try:
         model = YOLO(model_path)
-        results = model(image_path, show=True)  # Wyświetlenie obrazu z zaznaczeniami
+        results = model(image_path, show=True)  # Display Image with Annotations
     except Exception as e:
-        messagebox.showerror("Błąd YOLO", str(e))
+        messagebox.showerror("YOLO Error", str(e))
 
 # GUI layout
-tk.Label(app, text="Wybierz plik modelu (.pt lub .pth):").pack(pady=5)
-tk.Button(app, text="Wybierz model", command=choose_model).pack()
+tk.Label(app, text="Select model file (.pt or .pth):").pack(pady=5)
+tk.Button(app, text="Select Model", command=choose_model).pack()
 model_label.pack()
 
-tk.Label(app, text="Wybierz zdjęcie do analizy:").pack(pady=5)
-tk.Button(app, text="Wybierz zdjęcie", command=choose_image).pack()
+tk.Label(app, text="Select image for analysis:").pack(pady=5)
+tk.Button(app, text="Select Image", command=choose_image).pack()
 image_label.pack()
 
 image_display.pack(pady=10)
 
-tk.Button(app, text="Wykryj uszkodzenie", command=run_prediction, bg="#4CAF50", fg="white").pack(pady=10)
+tk.Button(app, text="Detect Defect", command=run_prediction, bg="#4CAF50", fg="white").pack(pady=10)
 result_label.pack()
 fault_detail_label.pack()
 
-tk.Label(app, text=f"Urządzenie: {device}").pack(pady=10)
+tk.Label(app, text=f"Device: {device}").pack(pady=10)
 
 app.mainloop()
