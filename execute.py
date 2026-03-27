@@ -22,12 +22,15 @@ CLASS_NAMES = ['Missing_hole', 'Mouse_bite', 'OK', 'Open_circuit', 'Short', 'Spu
 # GUI Initialization
 app = tk.Tk()
 app.title("PCB Inspection using Deep Learning")
-app.geometry("520x540")
+app.geometry("620x640")
 app.resizable(False, False)
 
 # Global Variables
 image_path = ""
 model_path = ""
+
+# Theme state
+dark_mode = False
 
 # GUI Elements
 model_label = tk.Label(app, text="No model loaded")
@@ -118,6 +121,33 @@ def run_yolo_detection():
     except Exception as e:
         messagebox.showerror("YOLO Error", str(e))
 
+def toggle_theme():
+    global dark_mode
+    dark_mode = not dark_mode
+
+    if dark_mode:
+        bg_color = "#2b2b2b"
+        fg_color = "white"
+        btn_color = "#444444"
+    else:
+        bg_color = "#f0f0f0"
+        fg_color = "black"
+        btn_color = "#e0e0e0"
+
+    app.config(bg=bg_color)
+
+    for widget in app.winfo_children():
+        try:
+            widget.config(bg=bg_color, fg=fg_color)
+        except:
+            pass
+
+    theme_button.config(
+        text="Light Mode" if dark_mode else "Dark Mode",
+        bg=btn_color,
+        fg=fg_color
+    )
+
 # GUI layout
 tk.Label(app, text="Select model file (.pt or .pth):").pack(pady=5)
 tk.Button(app, text="Select Model", command=choose_model).pack()
@@ -134,5 +164,8 @@ result_label.pack()
 fault_detail_label.pack()
 
 tk.Label(app, text=f"Device: {device}").pack(pady=10)
+
+theme_button = tk.Button(app, text="Dark Mode", command=toggle_theme)
+theme_button.pack(pady=5)
 
 app.mainloop()

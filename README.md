@@ -189,7 +189,7 @@ The project demonstrates that:
 <img src="images/confusion-matrix.png" width="600"/>
 
 ### Example PCB Defect (Spur)
-<img src="images/pcb-defect-example.jpg" width="600"/>
+<img src="images/pcb-defect-example.png" width="600"/>
 
 ## 🖥️ Application
 
