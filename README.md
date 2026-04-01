@@ -1,124 +1,124 @@
-# 🧠 PCB Defect Detection using Deep Learning
+# PCB Defect Detection using Deep Learning
 
 This project focuses on detecting defects and incorrect connections in PCB (Printed Circuit Boards) using deep learning techniques.
 
 ---
 
-## 📌 Project Goal
+## Project Goal
 
 The main objective of this project was to design and evaluate multiple deep learning approaches for PCB defect detection and to perform a **comparative analysis of different neural network architectures**.
 
 The study includes both:
 
-* image classification models
-* object detection approach (YOLOv8)
+- image classification models
+- object detection approach (YOLOv8)
 
 ---
 
-## 🔬 Research Approach
+## Research Approach
 
 This project is not only an implementation but also a **technology review and comparison of modern deep learning architectures** applied to PCB inspection.
 
 Different models were trained and evaluated under the same conditions to analyze:
 
-* accuracy
-* generalization capability
-* suitability for industrial applications
+- accuracy
+- generalization capability
+- suitability for industrial applications
 
 ---
 
-## 📊 Dataset
+## Dataset
 
 The dataset used in this project is based on a publicly available PCB defect detection dataset:
 
-* https://universe.roboflow.com/pcbdataset/pcb-defect-detection-9ewqw
+- https://universe.roboflow.com/pcbdataset/pcb-defect-detection-9ewqw
 
 The dataset contains approximately **700 images** divided into 7 defect classes:
 
-* Missing_hole
-* Mouse_bite
-* OK
-* Open_circuit
-* Short
-* Spur
-* Spurious_copper
+- Missing_hole
+- Mouse_bite
+- OK
+- Open_circuit
+- Short
+- Spur
+- Spurious_copper
 
 Images were resized to:
 
-* 256x256 (classification models)
-* 640x640 (YOLOv8)
+- 256x256 (classification models)
+- 640x640 (YOLOv8)
 
-⚠️ Important limitation:
+Important limitation:
 The dataset contains a relatively small number of samples and limited diversity (images from a small number of PCB boards), which negatively affects model generalization and leads to overfitting.
 
 ---
 
-## 🧠 Models Overview
+## Models Overview
 
-### 🔹 MLP (256 neurons)
+### MLP (256 neurons)
 
 A simple fully connected neural network used as a baseline model.
 
-* no spatial feature extraction
-* very limited performance
-* accuracy: **10%**
+- no spatial feature extraction
+- very limited performance
+- accuracy: **10%**
 
 ---
 
-### 🔹 Custom CNN
+### Custom CNN
 
 Basic convolutional neural network designed for feature extraction.
 
-* detects edges and local patterns
-* lightweight architecture
-* accuracy: **30%**
+- detects edges and local patterns
+- lightweight architecture
+- accuracy: **30%**
 
 ---
 
-### 🔹 ResNet18
+### ResNet18
 
 Residual neural network using skip connections.
 
-* solves vanishing gradient problem
-* allows deeper learning
-* accuracy: **30%**
+- solves vanishing gradient problem
+- allows deeper learning
+- accuracy: **30%**
 
 ---
 
-### 🔹 EfficientNet-B0 / B1
+### EfficientNet-B0 / B1
 
 Modern architecture optimized for performance vs efficiency.
 
-* compound scaling (depth, width, resolution)
-* efficient but sensitive to dataset quality
-* accuracy:
+- compound scaling (depth, width, resolution)
+- efficient but sensitive to dataset quality
+- accuracy:
 
-  * B0: **10%**
-  * B1: **20%**
+  - B0: **10%**
+  - B1: **20%**
 
 ---
 
-### 🔹 MobileNetV2
+### MobileNetV2
 
 Lightweight model designed for embedded systems.
 
-* optimized for low computational cost
-* suitable for real-time applications
-* accuracy: **20%**
+- optimized for low computational cost
+- suitable for real-time applications
+- accuracy: **20%**
 
 ---
 
-### 🔹 DenseNet121
+### DenseNet121
 
 Architecture with dense connections between layers.
 
-* strong feature reuse
-* improved gradient flow
-* accuracy: **20%**
+- strong feature reuse
+- improved gradient flow
+- accuracy: **20%**
 
 ---
 
-## 📉 Classification Results Summary
+## Classification Results Summary
 
 | Model             | Accuracy |
 | ----------------- | -------- |
@@ -132,47 +132,47 @@ Architecture with dense connections between layers.
 
 ---
 
-## ⚠️ Analysis of Results
+## Analysis of Results
 
 Despite using advanced architectures, classification accuracy remained low.
 
 ### Main reasons:
 
-* low dataset diversity
-* repeated defect locations
-* overfitting to background patterns
+- low dataset diversity
+- repeated defect locations
+- overfitting to background patterns
 
 This confirms that:
-👉 model architecture was NOT the main limitation
-👉 dataset quality was critical 
+- model architecture was NOT the main limitation
+- dataset quality was critical 
 
 ---
 
-## 🔄 Transition to Object Detection (YOLOv8)
+## Transition to Object Detection (YOLOv8)
 
 Due to poor classification performance, the approach was changed to **object detection**.
 
 YOLOv8 allows:
 
-* defect localization
-* detection of multiple defects
-* better generalization
+- defect localization
+- detection of multiple defects
+- better generalization
 
 ---
 
-## 📈 YOLOv8 Results
+## YOLOv8 Results
 
-* mAP@0.5: **76.4%**
-* mAP@0.5:0.95: **44.1%**
-* Precision: **78.3%**
-* Recall: **68.2%**
-* F1-score: **0.74**
+- mAP@0.5: **76.4%**
+- mAP@0.5:0.95: **44.1%**
+- Precision: **78.3%**
+- Recall: **68.2%**
+- F1-score: **0.74**
 
-👉 Significant improvement compared to classification models 
+- Significant improvement compared to classification models 
 
 ---
 
-## 🧠 Key Insight
+## Key Insight
 
 The project demonstrates that:
 
@@ -180,7 +180,7 @@ The project demonstrates that:
 
 ---
 
-## 🖼️ Example Results
+## Example Results
 
 ### YOLO Detection
 <img src="images/yolo-results.png" width="600"/>
@@ -191,36 +191,37 @@ The project demonstrates that:
 ### Example PCB Defect (Spur)
 <img src="images/pcb-defect-example.png" width="600"/>
 
-## 🖥️ Application
+## Application
 
 A GUI application was developed in Python:
 
-## 🛠️ Technologies & Libraries
+## Technologies & Libraries
 
-### 🔹 Core Libraries
+### Core Libraries
 
-* PyTorch – deep learning framework
-* torchvision – pretrained models and image transformations
-* Pillow – image processing
-* pandas – data handling and analysis
-* matplotlib – visualization
+- PyTorch – deep learning framework
+- torchvision – pretrained models and image transformations
+- Pillow – image processing
+- pandas – data handling and analysis
+- matplotlib – visualization
 
 ---
 
-### 🔹 Python Standard Libraries
+### Python Standard Libraries
 
 The following libraries are part of Python and do not require installation:
 
-* `os` – file system operations
-* `time` – time measurement and performance tracking
+- `os` – file system operations
+- `time` – time measurement and performance tracking
 
 ---
 
-### 🔹 GUI
+### GUI
 
-* `tkinter` – used for building the graphical user interface
+- `tkinter` – used for building the graphical user interface
 
-⚠️ **Note:**
+**Note:**
+
 `tkinter` is included with Python, but on some Linux distributions it must be installed manually.
 
 #### Installation by system:
@@ -245,44 +246,40 @@ sudo pacman -S tk
 
 ---
 
-### 🔹 Additional Tools
+### Additional Tools
 
-* YOLOv8 – object detection framework for PCB defect localization
+- YOLOv8 – object detection framework for PCB defect localization
 
 
 ### Features:
 
-* load trained model (.pth)
-* upload PCB image
-* classify defect type
-* detect defect location
-* visualize results
+- load trained model (.pth)
+- upload PCB image
+- classify defect type
+- detect defect location
+- visualize results
 
 ---
 
-## 🏭 Practical Applications
+## Practical Applications
 
-* Automated Visual Inspection (AVI)
-* PCB manufacturing quality control
-* defect detection before assembly
-* reduction of faulty products
-
----
-
-## 🚀 Future Work
-
-* increase dataset diversity
-* apply data augmentation
-* use segmentation models
-* test larger YOLO architectures (YOLOv8-s, YOLOv8-m)
+- Automated Visual Inspection (AVI)
+- PCB manufacturing quality control
+- defect detection before assembly
+- reduction of faulty products
 
 ---
 
-## 👨‍💻 Authors
+## Future Work
+
+- increase dataset diversity
+- apply data augmentation
+- use segmentation models
+- test larger YOLO architectures (YOLOv8-s, YOLOv8-m)
+
+---
+
+## Authors
 
 Hubert Jabłoński,
 Jakub Czekaj
-
-AGH University of Science and Technology
-Kraków, Poland
-
