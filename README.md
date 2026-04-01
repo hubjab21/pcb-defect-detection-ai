@@ -31,7 +31,7 @@ Different models were trained and evaluated under the same conditions to analyze
 
 The dataset used in this project is based on a publicly available PCB defect detection dataset:
 
-- https://universe.roboflow.com/pcbdataset/pcb-defect-detection-9ewqw
+ https://universe.roboflow.com/pcbdataset/pcb-defect-detection-9ewqw
 
 The dataset contains approximately **700 images** divided into 7 defect classes:
 
@@ -218,7 +218,7 @@ The following libraries are part of Python and do not require installation:
 
 ### GUI
 
-- `tkinter` – used for building the graphical user interface
+`tkinter` – used for building the graphical user interface
 
 **Note:**
 
